@@ -28,7 +28,9 @@
     "phaser": "^3.22.0"
   },
   "husky": {
-    "pre-commit": "npm run format"
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "parcelCleanPaths": [
     "dist"
