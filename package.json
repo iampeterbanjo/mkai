@@ -1,8 +1,8 @@
 {
   "name": "mortal-kombat-advanced-inputs",
   "version": "1.0.0",
-  "description": "[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/ourcade/phaser3-parcel-template)",
-  "main": "index.js",
+  "description": "[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/iampeterbanjo/mkai)",
+  "main": "build/index.js",
   "dependencies": {
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
@@ -16,8 +16,9 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "start-parcel": "parcel ./public/index.html",
-    "start": "serve",
+    "build": "parcel build ./public/index.html -d build",
+    "dev": "parcel ./public/index.html -p 8080",
+    "start": "serve -c serve.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
