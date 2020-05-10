@@ -1,0 +1,34 @@
+{
+  "name": "mortal-kombat-advanced-inputs",
+  "version": "1.0.0",
+  "description": "[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/ourcade/phaser3-parcel-template)",
+  "main": "index.js",
+  "dependencies": {
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "scribbletune": "^3.5.3",
+    "tone": "^14.6.13"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "serve": "^11.3.0",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "start-parcel": "parcel ./public/index.html",
+    "start": "serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iampeterbanjo/mkai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iampeterbanjo/mkai/issues"
+  },
+  "homepage": "https://github.com/iampeterbanjo/mkai#readme"
+}
