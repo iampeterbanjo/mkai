@@ -16,9 +16,22 @@ interface HandleButtonPressCallbackParams {
   buttons: readonly GamepadButton[];
 }
 
-const handleButtonPress = (
-  callback: (params: HandleButtonPressCallbackParams) => void
-) => {
+type HandleButtonPressCallback = (
+  params: HandleButtonPressCallbackParams
+) => void;
+
+const kick = scribble.clip({
+  sample: 'https://scribbletune.com/sounds/kick.wav', // new property: sample
+  pattern: 'x',
+});
+
+const handleButtonPress = ({
+  up,
+  down,
+}: {
+  up: HandleButtonPressCallback;
+  down: HandleButtonPressCallback;
+}) => {
   for (const pad of navigator.getGamepads()) {
     if (pad) {
       const buttons = pad.buttons;
@@ -28,9 +41,9 @@ const handleButtonPress = (
           index,
           'EXTRA_BUTTON_'
         );
-        if (button.pressed) {
-          callback({ button, name, value: button.value, buttons });
-        }
+        const params = { button, name, value: button.value, buttons };
+        const action = button.pressed ? up : down;
+        action(params);
       });
     }
   }
@@ -42,11 +55,22 @@ const runAnimation = () => {
   }
 
   window.requestAnimationFrame(runAnimation);
-  handleButtonPress(({ name, value }) => console.log(name, value));
+  handleButtonPress({
+    up: ({ name, value }) => {
+      kick.start();
+      console.log(name, value);
+    },
+    down: ({ name, value }) => {
+      kick.stop();
+      console.log('release');
+    },
+  });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log(`Let's GO!`);
+
+  Tone.Transport.start();
 
   const playButton = document.querySelector('.btn-play');
   if (playButton) {
@@ -59,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .start();
       console.log('click');
-      Tone.Transport.start();
     });
   }
 
