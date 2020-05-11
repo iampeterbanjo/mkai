@@ -7,10 +7,14 @@
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "scribbletune": "^3.5.3",
     "tone": "^14.6.13"
   },
   "devDependencies": {
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
     "parcel-bundler": "^1.12.4",
     "serve": "^11.3.0",
     "typescript": "^3.8.3"
