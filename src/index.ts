@@ -20,10 +20,72 @@ type HandleButtonPressCallback = (
   params: HandleButtonPressCallbackParams
 ) => void;
 
-const kick = scribble.clip({
-  sample: 'https://scribbletune.com/sounds/kick.wav', // new property: sample
-  pattern: 'x',
-});
+const sounds = {
+  FACE_1: scribble.clip({
+    sample: '/assets/sounds/piano48.wav', // new property: sample
+    pattern: 'x',
+  }),
+  FACE_2: scribble.clip({
+    sample: '/assets/sounds/piano49.wav', // new property: sample
+    pattern: 'x',
+  }),
+  FACE_3: scribble.clip({
+    sample: '/assets/sounds/piano50.wav', // new property: sample
+    pattern: 'x',
+  }),
+  FACE_4: scribble.clip({
+    sample: '/assets/sounds/piano51.wav', // new property: sample
+    pattern: 'x',
+  }),
+  LEFT_TOP_SHOULDER: scribble.clip({
+    sample: '/assets/sounds/piano52.wav', // new property: sample
+    pattern: 'x',
+  }),
+  RIGHT_TOP_SHOULDER: scribble.clip({
+    sample: '/assets/sounds/piano53.wav', // new property: sample
+    pattern: 'x',
+  }),
+  LEFT_BOTTOM_SHOULDER: scribble.clip({
+    sample: '/assets/sounds/piano54.wav', // new property: sample
+    pattern: 'x',
+  }),
+  RIGHT_BOTTOM_SHOULDER: scribble.clip({
+    sample: '/assets/sounds/piano55.wav', // new property: sample
+    pattern: 'x',
+  }),
+  SELECT_BACK: scribble.clip({
+    sample: '/assets/sounds/piano56.wav', // new property: sample
+    pattern: 'x',
+  }),
+  START_FORWARD: scribble.clip({
+    sample: '/assets/sounds/piano57.wav', // new property: sample
+    pattern: 'x',
+  }),
+  LEFT_STICK: scribble.clip({
+    sample: '/assets/sounds/piano58.wav', // new property: sample
+    pattern: 'x',
+  }),
+  RIGHT_STICK: scribble.clip({
+    sample: '/assets/sounds/piano59.wav', // new property: sample
+    pattern: 'x',
+  }),
+  DPAD_UP: scribble.clip({
+    sample: '/assets/sounds/piano60.wav', // new property: sample
+    pattern: 'x',
+  }),
+  DPAD_DOWN: scribble.clip({
+    sample: '/assets/sounds/piano61.wav', // new property: sample
+    pattern: 'x',
+  }),
+  DPAD_LEFT: scribble.clip({
+    sample: '/assets/sounds/piano62.wav', // new property: sample
+    pattern: 'x',
+  }),
+  DPAD_RIGHT: scribble.clip({
+    sample: '/assets/sounds/piano63.wav', // new property: sample
+    pattern: 'x',
+  }),
+};
 
 const active = {};
 
@@ -43,14 +105,16 @@ const handleButtonPress = ({
           index,
           'EXTRA_BUTTON_'
         );
-        const params = { button, name, value: button.value, buttons };
-        if (button.value === 1) {
-          active[name] = true;
-          down(params);
-        }
-        if (active[name] && button.value !== 1) {
-          active[name] = false;
-          up(params);
+        if (sounds[name]) {
+          const params = { button, name, value: button.value, buttons };
+          if (button.value === 1) {
+            active[name] = true;
+            down(params);
+          }
+          if (active[name] && button.value !== 1) {
+            active[name] = false;
+            up(params);
+          }
         }
       });
     }
@@ -65,10 +129,10 @@ const runAnimation = () => {
   window.requestAnimationFrame(runAnimation);
   handleButtonPress({
     up: ({ name, value }) => {
-      kick.stop();
+      sounds[name].stop();
     },
     down: ({ name, value }) => {
-      kick.start();
+      sounds[name].start();
     },
   });
 };
