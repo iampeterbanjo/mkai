@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
+    "gh-pages": "^2.2.0",
     "nodemon": "^2.0.3",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.4",
@@ -22,10 +23,12 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "build": "parcel build ./src/index.ts -d ./public/build",
+    "build": "parcel build ./src/index.ts -d ./public/js",
     "dev": "run-p watch start",
     "watch": "nodemon --watch src -e js,ts -x 'npm run build'",
     "start": "serve -c serve.json -p 8080",
+    "release": "run-s build pages",
+    "pages": "gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
