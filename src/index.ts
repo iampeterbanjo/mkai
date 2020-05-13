@@ -52,7 +52,7 @@ const handleButtonPress = () => {
         if (index === 6 && axis === -1) {
           console.log('DPAD_LEFT');
           active['DPAD_LEFT'] = true;
-          playSound('DPAD_LEFT', index, 'sine');
+          playSound('DPAD_LEFT', Math.abs(index + axis), 'sine');
         }
         if (index === 6 && axis === 0 && active['DPAD_RIGHT']) {
           stopSound('DPAD_RIGHT');
@@ -60,7 +60,7 @@ const handleButtonPress = () => {
         if (index === 6 && axis === 1) {
           console.log('DPAD_RIGHT');
           active['DPAD_RIGHT'] = true;
-          playSound('DPAD_RIGHT', index, 'sine');
+          playSound('DPAD_RIGHT', Math.abs(index + axis), 'sine');
         }
 
         // up/down
@@ -71,7 +71,7 @@ const handleButtonPress = () => {
         if (index === 7 && axis === -1) {
           console.log('DPAD_UP');
           active['DPAD_UP'] = true;
-          playSound('DPAD_UP', index, 'sine');
+          playSound('DPAD_UP', Math.abs(index + axis), 'sine');
         }
         if (index === 7 && axis === 0 && active['DPAD_DOWN']) {
           active['DPAD_DOWN'] = false;
@@ -80,7 +80,7 @@ const handleButtonPress = () => {
         if (index === 7 && axis === 1) {
           console.log('DPAD_DOWN');
           active['DPAD_DOWN'] = true;
-          playSound('DPAD_DOWN', index, 'sine');
+          playSound('DPAD_DOWN', Math.abs(index + axis), 'sine');
         }
       });
       pad.buttons.forEach((button, index) => {

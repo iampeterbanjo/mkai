@@ -75,6 +75,8 @@ export const generateSound = (index: number, type: string = 'triangle') =>
     options: {
       frequency: 16.351 * index,
       type,
+      volume: 0.7,
+      attack: 0.1,
     },
   });
 
