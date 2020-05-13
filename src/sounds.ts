@@ -71,7 +71,7 @@ export const midi = {
   BUTTON_3: scribble.clip({
     synth: 'PluckSynth',
     notes: 'a4',
-    pattern: '[x]',
+    pattern: '[[x]]',
   }),
   BUTTON_4: scribble.clip({
     synth: 'PluckSynth',
