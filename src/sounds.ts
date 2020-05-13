@@ -69,6 +69,15 @@ export const piano = {
   }),
 };
 
+export const generateSound = (index: number, type: string = 'triangle') =>
+  new Pizzicato.Sound({
+    source: 'wave',
+    options: {
+      frequency: 16.351 * index,
+      type,
+    },
+  });
+
 export const midi = {
   BUTTON_3: scribble.clip({
     synth: 'PluckSynth',

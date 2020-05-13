@@ -1,4 +1,4 @@
-import { piano, midi } from './sounds';
+import { piano, midi, generateSound } from './sounds';
 
 const { Tone } = window;
 
@@ -10,6 +10,7 @@ const getControlName = (names, index, extraPrefix) => {
 };
 
 const active = {};
+const bank = {};
 
 const STANDARD_BUTTONS = [
   'BUTTON_3',
@@ -31,44 +32,55 @@ const STANDARD_BUTTONS = [
   'HOME',
 ];
 
+const playSound = (name: string, index: number, type?: string) => {
+  bank[name] = bank[name] || generateSound(index, type);
+  bank[name].play();
+};
+
+const stopSound = (name: string) => {
+  bank[name].stop();
+};
+
 const handleButtonPress = () => {
   for (const pad of navigator.getGamepads()) {
     if (pad) {
       pad.axes.forEach((axis, index) => {
         // left/right
         if (index === 6 && axis === 0 && active['DPAD_LEFT']) {
-          piano['DPAD_LEFT']().stop();
+          stopSound('DPAD_LEFT');
         }
         if (index === 6 && axis === -1) {
           console.log('DPAD_LEFT');
           active['DPAD_LEFT'] = true;
-          piano['DPAD_LEFT']().start();
+          playSound('DPAD_LEFT', index, 'sine');
         }
         if (index === 6 && axis === 0 && active['DPAD_RIGHT']) {
-          piano['DPAD_RIGHT']().stop();
+          stopSound('DPAD_RIGHT');
         }
         if (index === 6 && axis === 1) {
           console.log('DPAD_RIGHT');
           active['DPAD_RIGHT'] = true;
-          piano['DPAD_RIGHT']().start();
+          playSound('DPAD_RIGHT', index, 'sine');
         }
 
         // up/down
         if (index === 7 && axis === 0 && active['DPAD_UP']) {
-          piano['DPAD_UP']().stop();
+          active['DPAD_UP'] = false;
+          stopSound('DPAD_UP');
         }
         if (index === 7 && axis === -1) {
           console.log('DPAD_UP');
           active['DPAD_UP'] = true;
-          piano['DPAD_UP']().start();
+          playSound('DPAD_UP', index, 'sine');
         }
         if (index === 7 && axis === 0 && active['DPAD_DOWN']) {
-          piano['DPAD_DOWN']().stop();
+          active['DPAD_DOWN'] = false;
+          stopSound('DPAD_DOWN');
         }
         if (index === 7 && axis === 1) {
           console.log('DPAD_DOWN');
           active['DPAD_DOWN'] = true;
-          piano['DPAD_DOWN']().start();
+          playSound('DPAD_DOWN', index, 'sine');
         }
       });
       pad.buttons.forEach((button, index) => {
@@ -77,11 +89,11 @@ const handleButtonPress = () => {
           if (button.value === 1) {
             console.log(name);
             active[name] = true;
-            midi[name]().start();
+            playSound(name, index);
           }
           if (active[name] && button.value !== 1) {
             active[name] = false;
-            midi[name]().stop();
+            stopSound(name);
           }
         }
       });
