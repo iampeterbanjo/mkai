@@ -36,49 +36,47 @@ const playSound = (name: string, index: number, type?: string) => {
 };
 
 const stopSound = (name: string) => {
+  const sound = bank[name];
+  if (!sound) {
+    return;
+  }
   bank[name].stop();
 };
+
+const handleAxis = (up: string, down: string) => (
+  axis: number,
+  value: number
+) => {
+  if (axis === 0) {
+    stopSound(up);
+    stopSound(down);
+  }
+  if (axis === -1) {
+    console.log(up);
+    playSound(up, value, 'sine');
+  }
+  if (axis === 1) {
+    console.log(down);
+    playSound(down, value, 'sine');
+  }
+};
+
+const handleY = handleAxis('DPAD_UP', 'DPAD_DOWN');
+const handleX = handleAxis('DPAD_LEFT', 'DPAD_RIGHT');
 
 const handleButtonPress = () => {
   for (const pad of navigator.getGamepads()) {
     if (pad) {
       pad.axes.forEach((axis, index) => {
+        const value = Math.abs(index + axis);
         // left/right
-        if (index === 6 && axis === 0 && active['DPAD_LEFT']) {
-          stopSound('DPAD_LEFT');
-        }
-        if (index === 6 && axis === -1) {
-          console.log('DPAD_LEFT');
-          active['DPAD_LEFT'] = true;
-          playSound('DPAD_LEFT', Math.abs(index + axis), 'sine');
-        }
-        if (index === 6 && axis === 0 && active['DPAD_RIGHT']) {
-          stopSound('DPAD_RIGHT');
-        }
-        if (index === 6 && axis === 1) {
-          console.log('DPAD_RIGHT');
-          active['DPAD_RIGHT'] = true;
-          playSound('DPAD_RIGHT', Math.abs(index + axis), 'sine');
+        if (index === 6) {
+          return handleX(axis, value);
         }
 
         // up/down
-        if (index === 7 && axis === 0 && active['DPAD_UP']) {
-          active['DPAD_UP'] = false;
-          stopSound('DPAD_UP');
-        }
-        if (index === 7 && axis === -1) {
-          console.log('DPAD_UP');
-          active['DPAD_UP'] = true;
-          playSound('DPAD_UP', Math.abs(index + axis), 'sine');
-        }
-        if (index === 7 && axis === 0 && active['DPAD_DOWN']) {
-          active['DPAD_DOWN'] = false;
-          stopSound('DPAD_DOWN');
-        }
-        if (index === 7 && axis === 1) {
-          console.log('DPAD_DOWN');
-          active['DPAD_DOWN'] = true;
-          playSound('DPAD_DOWN', Math.abs(index + axis), 'sine');
+        if (index === 7) {
+          handleY(axis, value);
         }
       });
       pad.buttons.forEach((button, index) => {
