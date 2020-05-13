@@ -25,6 +25,8 @@ const kick = scribble.clip({
   pattern: 'x',
 });
 
+const active = {};
+
 const handleButtonPress = ({
   up,
   down,
@@ -42,8 +44,14 @@ const handleButtonPress = ({
           'EXTRA_BUTTON_'
         );
         const params = { button, name, value: button.value, buttons };
-        const action = button.pressed ? up : down;
-        action(params);
+        if (button.value === 1) {
+          active[name] = true;
+          down(params);
+        }
+        if (active[name] && button.value !== 1) {
+          active[name] = false;
+          up(params);
+        }
       });
     }
   }
@@ -57,12 +65,10 @@ const runAnimation = () => {
   window.requestAnimationFrame(runAnimation);
   handleButtonPress({
     up: ({ name, value }) => {
-      kick.start();
-      console.log(name, value);
+      kick.stop();
     },
     down: ({ name, value }) => {
-      kick.stop();
-      console.log('release');
+      kick.start();
     },
   });
 };
