@@ -87,7 +87,7 @@ const handleButtonPress = () => {
         const name = getControlName(STANDARD_BUTTONS, index, 'EXTRA_BUTTON_');
         if (midi[name]) {
           if (button.value === 1) {
-            console.log(name);
+            console.log(name, index);
             active[name] = true;
             playSound(name, index);
           }
