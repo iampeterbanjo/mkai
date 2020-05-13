@@ -1,6 +1,4 @@
-import { piano, midi, generateSound } from './sounds';
-
-const { Tone } = window;
+import { generateSound } from './sounds';
 
 let gamepad_is_connected = false;
 const getControlName = (names, index, extraPrefix) => {
@@ -85,16 +83,15 @@ const handleButtonPress = () => {
       });
       pad.buttons.forEach((button, index) => {
         const name = getControlName(STANDARD_BUTTONS, index, 'EXTRA_BUTTON_');
-        if (midi[name]) {
-          if (button.value === 1) {
-            console.log(name, index);
-            active[name] = true;
-            playSound(name, index);
-          }
-          if (active[name] && button.value !== 1) {
-            active[name] = false;
-            stopSound(name);
-          }
+
+        if (button.value === 1) {
+          console.log(name, index);
+          active[name] = true;
+          playSound(name, index);
+        }
+        if (active[name] && button.value !== 1) {
+          active[name] = false;
+          stopSound(name);
         }
       });
     }
@@ -112,8 +109,6 @@ const runAnimation = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log(`Let's GO!`);
-
-  Tone.Transport.start();
 
   window.addEventListener('gamepadconnected', (event) => {
     console.log('Gamepad connected');

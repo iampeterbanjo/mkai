@@ -9,9 +9,7 @@
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "scribbletune": "^3.5.3",
-    "tone": "^14.6.13"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.35",
