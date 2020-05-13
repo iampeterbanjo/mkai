@@ -13,7 +13,6 @@ interface HandleButtonPressCallbackParams {
   name: string;
   value: number;
   button: GamepadButton;
-  buttons: readonly GamepadButton[];
 }
 
 type HandleButtonPressCallback = (
@@ -87,7 +86,27 @@ const sounds = {
   }),
 };
 
+const formatFloat = (n: number, places: number) => {
+  var m = Math.pow(10, places);
+  return '' + parseFloat('' + Math.round(n * m) / m).toFixed(places);
+};
+
 const active = {};
+
+const getAxisName = (sum: number): string => {
+  switch (sum) {
+    case 8:
+      return 'DPAD_DOWN';
+    case 6:
+      return 'DPAD_UP';
+    case 5:
+      return 'DPAD_LEFT';
+    case 7:
+      return 'DPAD_RIGHT';
+    default:
+      return 'uknown';
+  }
+};
 
 const handleButtonPress = ({
   up,
@@ -98,15 +117,48 @@ const handleButtonPress = ({
 }) => {
   for (const pad of navigator.getGamepads()) {
     if (pad) {
-      const buttons = pad.buttons;
-      buttons.forEach((button, index) => {
+      pad.axes.forEach((axis, index) => {
+        // left/right
+        if (index === 6 && axis === 0 && active['DPAD_LEFT']) {
+          sounds['DPAD_LEFT'].stop();
+        }
+        if (index === 6 && axis === -1) {
+          active['DPAD_LEFT'] = true;
+          sounds['DPAD_LEFT'].start();
+        }
+        if (index === 6 && axis === 0 && active['DPAD_RIGHT']) {
+          sounds['DPAD_RIGHT'].stop();
+        }
+        if (index === 6 && axis === 1) {
+          active['DPAD_RIGHT'] = true;
+          sounds['DPAD_RIGHT'].start();
+        }
+
+        // up/down
+        if (index === 7 && axis === 0 && active['DPAD_UP']) {
+          sounds['DPAD_UP'].stop();
+        }
+        if (index === 7 && axis === -1) {
+          active['DPAD_UP'] = true;
+          sounds['DPAD_UP'].start();
+        }
+        if (index === 7 && axis === 0 && active['DPAD_DOWN']) {
+          sounds['DPAD_DOWN'].stop();
+        }
+        if (index === 7 && axis === 1) {
+          active['DPAD_DOWN'] = true;
+          sounds['DPAD_DOWN'].start();
+        }
+      });
+      pad.buttons.forEach((button, index) => {
         const name = getControlName(
           Gamepad.StandardButtons,
           index,
           'EXTRA_BUTTON_'
         );
+        if (button.value === 1) console.log(name);
         if (sounds[name]) {
-          const params = { button, name, value: button.value, buttons };
+          const params = { button, name, value: button.value };
           if (button.value === 1) {
             active[name] = true;
             down(params);
