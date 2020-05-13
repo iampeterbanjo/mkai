@@ -37,38 +37,38 @@ const handleButtonPress = () => {
       pad.axes.forEach((axis, index) => {
         // left/right
         if (index === 6 && axis === 0 && active['DPAD_LEFT']) {
-          piano['DPAD_LEFT'].stop();
+          piano['DPAD_LEFT']().stop();
         }
         if (index === 6 && axis === -1) {
           console.log('DPAD_LEFT');
           active['DPAD_LEFT'] = true;
-          piano['DPAD_LEFT'].start();
+          piano['DPAD_LEFT']().start();
         }
         if (index === 6 && axis === 0 && active['DPAD_RIGHT']) {
-          piano['DPAD_RIGHT'].stop();
+          piano['DPAD_RIGHT']().stop();
         }
         if (index === 6 && axis === 1) {
           console.log('DPAD_RIGHT');
           active['DPAD_RIGHT'] = true;
-          piano['DPAD_RIGHT'].start();
+          piano['DPAD_RIGHT']().start();
         }
 
         // up/down
         if (index === 7 && axis === 0 && active['DPAD_UP']) {
-          piano['DPAD_UP'].stop();
+          piano['DPAD_UP']().stop();
         }
         if (index === 7 && axis === -1) {
           console.log('DPAD_UP');
           active['DPAD_UP'] = true;
-          piano['DPAD_UP'].start();
+          piano['DPAD_UP']().start();
         }
         if (index === 7 && axis === 0 && active['DPAD_DOWN']) {
-          piano['DPAD_DOWN'].stop();
+          piano['DPAD_DOWN']().stop();
         }
         if (index === 7 && axis === 1) {
           console.log('DPAD_DOWN');
           active['DPAD_DOWN'] = true;
-          piano['DPAD_DOWN'].start();
+          piano['DPAD_DOWN']().start();
         }
       });
       pad.buttons.forEach((button, index) => {
@@ -77,11 +77,11 @@ const handleButtonPress = () => {
           if (button.value === 1) {
             console.log(name);
             active[name] = true;
-            midi[name].start();
+            midi[name]().start();
           }
           if (active[name] && button.value !== 1) {
             active[name] = false;
-            midi[name].stop();
+            midi[name]().stop();
           }
         }
       });

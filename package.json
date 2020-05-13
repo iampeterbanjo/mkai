@@ -5,6 +5,7 @@
   "main": "build/index.js",
   "dependencies": {
     "husky": "^4.2.5",
+    "pizzicato": "^0.6.4",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "^16.13.1",
