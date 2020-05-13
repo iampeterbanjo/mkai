@@ -26,7 +26,8 @@
     "dev": "run-p watch start",
     "watch": "nodemon --watch src -e js,ts -x 'npm run build'",
     "start": "serve -c serve.json -p 8080",
-    "release": "run-s build pages",
+    "push": "git push -u origin (git rev-parse --abbrev-ref HEAD)",
+    "release": "run-s build pages push",
     "pages": "gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
