@@ -1,68 +1,151 @@
-const { scribble, Tone } = window;
+const { scribble } = window;
 
-export const sounds = {
-  FACE_1: scribble.clip({
+export const piano = {
+  BUTTON_3: scribble.clip({
     sample: '/assets/sounds/piano48.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
-  FACE_2: scribble.clip({
+  BUTTON_4: scribble.clip({
     sample: '/assets/sounds/piano49.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
-  FACE_3: scribble.clip({
+  BUTTON_1: scribble.clip({
     sample: '/assets/sounds/piano50.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
-  FACE_4: scribble.clip({
+  BUTTON_2: scribble.clip({
     sample: '/assets/sounds/piano51.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
-  LEFT_TOP_SHOULDER: scribble.clip({
+  THROW: scribble.clip({
     sample: '/assets/sounds/piano52.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
-  RIGHT_TOP_SHOULDER: scribble.clip({
+  AMP: scribble.clip({
     sample: '/assets/sounds/piano53.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   LEFT_BOTTOM_SHOULDER: scribble.clip({
     sample: '/assets/sounds/piano54.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   RIGHT_BOTTOM_SHOULDER: scribble.clip({
     sample: '/assets/sounds/piano55.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   SELECT_BACK: scribble.clip({
     sample: '/assets/sounds/piano56.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   START_FORWARD: scribble.clip({
     sample: '/assets/sounds/piano57.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   LEFT_STICK: scribble.clip({
     sample: '/assets/sounds/piano58.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   RIGHT_STICK: scribble.clip({
     sample: '/assets/sounds/piano59.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   DPAD_UP: scribble.clip({
     sample: '/assets/sounds/piano60.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   DPAD_DOWN: scribble.clip({
     sample: '/assets/sounds/piano61.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   DPAD_LEFT: scribble.clip({
     sample: '/assets/sounds/piano62.wav',
-    pattern: 'x',
+    pattern: '[x]',
   }),
   DPAD_RIGHT: scribble.clip({
     sample: '/assets/sounds/piano63.wav',
-    pattern: 'x',
+    pattern: '[x]',
+  }),
+};
+
+export const midi = {
+  BUTTON_3: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'a4',
+    pattern: '[x]',
+  }),
+  BUTTON_4: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'a3',
+    pattern: '[x]',
+  }),
+  BUTTON_1: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c0',
+    pattern: '[x]',
+  }),
+  BUTTON_2: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c1',
+    pattern: '[x]',
+  }),
+  THROW: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c2',
+    pattern: '[x]',
+  }),
+  AMP: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c3',
+    pattern: '[x]',
+  }),
+  LEFT_BOTTOM_SHOULDER: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c4',
+    pattern: '[x]',
+  }),
+  RIGHT_BOTTOM_SHOULDER: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c5',
+    pattern: '[x]',
+  }),
+  SELECT_BACK: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c6',
+    pattern: '[x]',
+  }),
+  START_FORWARD: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c7',
+    pattern: '[x]',
+  }),
+  LEFT_STICK: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c8',
+    pattern: '[x]',
+  }),
+  RIGHT_STICK: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c9',
+    pattern: '[x]',
+  }),
+  DPAD_UP: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'c4',
+    pattern: '[x]',
+  }),
+  DPAD_DOWN: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'd4',
+    pattern: '[x]',
+  }),
+  DPAD_LEFT: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'e4',
+    pattern: '[x]',
+  }),
+  DPAD_RIGHT: scribble.clip({
+    synth: 'PluckSynth',
+    notes: 'f4',
+    pattern: '[x]',
   }),
 };

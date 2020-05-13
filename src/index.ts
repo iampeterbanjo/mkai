@@ -1,4 +1,4 @@
-import { sounds } from './sounds';
+import { piano, midi } from './sounds';
 
 const { Tone } = window;
 
@@ -12,12 +12,12 @@ const getControlName = (names, index, extraPrefix) => {
 const active = {};
 
 const STANDARD_BUTTONS = [
-  'FACE_1',
-  'FACE_2',
-  'FACE_3',
-  'FACE_4',
-  'LEFT_TOP_SHOULDER',
-  'RIGHT_TOP_SHOULDER',
+  'BUTTON_3',
+  'BUTTON_4',
+  'BUTTON_1',
+  'BUTTON_2',
+  'THROW',
+  'AMP',
   'LEFT_BOTTOM_SHOULDER',
   'RIGHT_BOTTOM_SHOULDER',
   'SELECT_BACK',
@@ -37,46 +37,51 @@ const handleButtonPress = () => {
       pad.axes.forEach((axis, index) => {
         // left/right
         if (index === 6 && axis === 0 && active['DPAD_LEFT']) {
-          sounds['DPAD_LEFT'].stop();
+          midi['DPAD_LEFT'].stop();
         }
         if (index === 6 && axis === -1) {
+          console.log('DPAD_LEFT');
           active['DPAD_LEFT'] = true;
-          sounds['DPAD_LEFT'].start();
+          midi['DPAD_LEFT'].start();
         }
         if (index === 6 && axis === 0 && active['DPAD_RIGHT']) {
-          sounds['DPAD_RIGHT'].stop();
+          midi['DPAD_RIGHT'].stop();
         }
         if (index === 6 && axis === 1) {
+          console.log('DPAD_RIGHT');
           active['DPAD_RIGHT'] = true;
-          sounds['DPAD_RIGHT'].start();
+          midi['DPAD_RIGHT'].start();
         }
 
         // up/down
         if (index === 7 && axis === 0 && active['DPAD_UP']) {
-          sounds['DPAD_UP'].stop();
+          midi['DPAD_UP'].stop();
         }
         if (index === 7 && axis === -1) {
+          console.log('DPAD_UP');
           active['DPAD_UP'] = true;
-          sounds['DPAD_UP'].start();
+          midi['DPAD_UP'].start();
         }
         if (index === 7 && axis === 0 && active['DPAD_DOWN']) {
-          sounds['DPAD_DOWN'].stop();
+          midi['DPAD_DOWN'].stop();
         }
         if (index === 7 && axis === 1) {
+          console.log('DPAD_DOWN');
           active['DPAD_DOWN'] = true;
-          sounds['DPAD_DOWN'].start();
+          midi['DPAD_DOWN'].start();
         }
       });
       pad.buttons.forEach((button, index) => {
         const name = getControlName(STANDARD_BUTTONS, index, 'EXTRA_BUTTON_');
-        if (sounds[name]) {
+        if (piano[name]) {
           if (button.value === 1) {
+            console.log(name);
             active[name] = true;
-            sounds[name].start();
+            piano[name].start();
           }
           if (active[name] && button.value !== 1) {
             active[name] = false;
-            sounds[name].stop();
+            piano[name].stop();
           }
         }
       });
