@@ -9,6 +9,7 @@ export const generateSound = (index: number, type: string = 'triangle') => {
       type,
       volume: 0.7,
       attack: 0.1,
+      release: 0.1
     },
   });
 };

@@ -30,7 +30,12 @@ const STANDARD_BUTTONS = [
   'HOME',
 ];
 
+let frame = 0;
+
 const playSound = (name: string, index: number, type?: string) => {
+  if (frame % 15 === 0) {
+    stopSound(name);
+  }
   bank[name] = bank[name] || generateSound(index, type);
   bank[name].play();
 };
@@ -101,6 +106,7 @@ const runAnimation = () => {
     return;
   }
 
+  frame = frame === 60 ? 0 : frame + 1; 
   window.requestAnimationFrame(runAnimation);
   handleButtonPress();
 };
