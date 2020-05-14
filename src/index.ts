@@ -1,4 +1,4 @@
-import { generateSound } from './sounds';
+import { generateSound, getVolume } from './sounds';
 
 let gamepad_is_connected = false;
 const getControlName = (names, index, extraPrefix) => {
@@ -37,6 +37,7 @@ const playSound = (name: string, index: number, type?: string) => {
     stopSound(name);
   }
   bank[name] = bank[name] || generateSound(index, type);
+  bank[name].volume = getVolume();
   bank[name].play();
 };
 
