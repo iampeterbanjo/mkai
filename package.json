@@ -33,7 +33,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {
-    "pre-commit": "npm run format"
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
   },
   "repository": {
     "type": "git",
