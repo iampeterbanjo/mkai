@@ -30,6 +30,7 @@ const STANDARD_BUTTONS = [
   "HOME",
 ];
 
+let gapCountdown = -1;
 let frame = 0;
 let inputBuffer = [] as string[];
 const checkInputs = (name: string) => {
@@ -38,13 +39,32 @@ const checkInputs = (name: string) => {
   console.log(buffer);
   if (buffer === "DPAD_DOWN,DPAD_LEFT,BUTTON_1") {
     console.log("BOOM");
+    const gapEl = document.getElementById('gap') as HTMLInputElement;
+    const gap = parseInt(gapEl.value, 10)
+    console.log(gap)
+    if(gapEl &&  gap > 0) {
+        gapCountdown = gap;
+    }
     inputBuffer = [];
     playSound("BOOM", 50);
+    setTimeout(() => stopSound("BOOM"), 250)
   }
   if (name === "SELECT_BACK" || inputBuffer.length === 3) {
     inputBuffer = [];
   }
 };
+
+const checkGap = () => {
+    if(gapCountdown >= 0) {
+        gapCountdown =- 1;
+    }
+    if(gapCountdown === 0) {
+        playSound('GAP', 70);
+        setTimeout(() => stopSound("GAP"), 250)
+
+        console.log('GAP!')
+    }
+}
 
 const playSound = (name: string, index: number, type?: string) => {
   if (frame % 15 === 0) {
@@ -124,6 +144,7 @@ const runAnimation = () => {
   frame = frame === 60 ? 0 : frame + 1;
   window.requestAnimationFrame(runAnimation);
   handleButtonPress();
+  checkGap();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
