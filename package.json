@@ -4,7 +4,6 @@
   "description": "[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/iampeterbanjo/mkai)",
   "main": "build/index.js",
   "dependencies": {
-    "husky": "^4.2.5",
     "pizzicato": "^0.6.4",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
@@ -15,6 +14,7 @@
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
     "gh-pages": "^2.2.0",
+    "husky": "^4.2.5",
     "nodemon": "^2.0.3",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.4",
